@@ -16,6 +16,4 @@
 @property (nonatomic,strong) UILabel *dateTALabel;
 @property (nonatomic,strong) UIImageView *mediaView;
 
-
-
 @end

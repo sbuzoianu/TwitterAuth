@@ -51,7 +51,6 @@
         [self addSubview:self.dateTALabel];
         [self addSubview:self.mediaView];
         
-        
         // self.mediaView constraints
         self.mediaView.translatesAutoresizingMaskIntoConstraints=NO;
         [self addConstraint:[NSLayoutConstraint

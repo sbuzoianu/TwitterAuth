@@ -6,7 +6,6 @@
 //  Copyright © 2016 Stefan. All rights reserved.
 //
 
-
 #import <UIKit/UIKit.h>
 #import "TAUITableViewCellWithoutImage.h"
 
