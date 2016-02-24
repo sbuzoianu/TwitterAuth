@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  NewTweetAuth
+//  TwitterAuth
 //
 //  Created by admin on 22/02/16.
 //  Copyright © 2016 admin. All rights reserved.

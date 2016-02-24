@@ -37,7 +37,7 @@
 		0C61A9181C45483F002C4118 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		0C7BE8021C5E08E700EFC219 /* TAUITableViewCellWithoutImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAUITableViewCellWithoutImage.m; sourceTree = "<group>"; };
 		0C7BE8041C5E3D5600EFC219 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		0CAD10601C75E23900B4C4F6 /* TAUITableViewCellWithoutImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TAUITableViewCellWithoutImage.h; path = ../TAUITableViewCellWithoutImage.h; sourceTree = "<group>"; };
+		84C6B9FA1C7DE2A600DE7620 /* TAUITableViewCellWithoutImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TAUITableViewCellWithoutImage.h; sourceTree = "<group>"; };
 		84E7EE441C7DD0D70024F245 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		84E7EE451C7DD0D70024F245 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,7 +83,7 @@
 				84E7EE451C7DD0D70024F245 /* MainViewController.m */,
 				0C61A9001C4546D3002C4118 /* AppDelegate.h */,
 				0C61A9011C4546D3002C4118 /* AppDelegate.m */,
-				0CAD10601C75E23900B4C4F6 /* TAUITableViewCellWithoutImage.h */,
+				84C6B9FA1C7DE2A600DE7620 /* TAUITableViewCellWithoutImage.h */,
 				0C7BE8021C5E08E700EFC219 /* TAUITableViewCellWithoutImage.m */,
 				0C3851C31C6C928B006BAC05 /* TAUITableViewCellWithImage.h */,
 				0C3851C41C6C928B006BAC05 /* TAUITableViewCellWithImage.m */,

@@ -18,4 +18,5 @@
 @property (nonatomic, copy) NSString *query;
 
 
+
 @end

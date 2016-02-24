@@ -8,5 +8,6 @@
 @property (nonatomic,strong) UILabel *dateTALabel;
 
 
+
 @end
 
