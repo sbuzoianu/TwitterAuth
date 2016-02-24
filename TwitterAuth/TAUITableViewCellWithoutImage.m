@@ -15,7 +15,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
         self.userTALabel = [[UILabel alloc] init];
         self.userTALabel.textColor = [UIColor blackColor];
         //      self.userTALabel.backgroundColor= [UIColor greenColor];

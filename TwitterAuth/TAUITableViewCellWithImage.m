@@ -5,6 +5,7 @@
 //  Created by Stefan on 11/02/16.
 //  Copyright © 2016 Stefan. All rights reserved.
 //
+
 #import <UIKit/UIKit.h>
 #import "TAUITableViewCellWithImage.h"
 

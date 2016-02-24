@@ -7,5 +7,6 @@
 @property (nonatomic,strong) UILabel *textTALabel;
 @property (nonatomic,strong) UILabel *dateTALabel;
 
+
 @end
 

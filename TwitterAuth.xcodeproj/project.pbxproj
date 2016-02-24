@@ -10,7 +10,6 @@
 		0C3851C51C6C928B006BAC05 /* TAUITableViewCellWithImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C3851C41C6C928B006BAC05 /* TAUITableViewCellWithImage.m */; };
 		0C61A8FF1C4546D3002C4118 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A8FE1C4546D3002C4118 /* main.m */; };
 		0C61A9021C4546D3002C4118 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A9011C4546D3002C4118 /* AppDelegate.m */; };
-		0C61A9051C4546D3002C4118 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C61A9041C4546D3002C4118 /* ViewController.m */; };
 		0C61A9081C4546D3002C4118 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C61A9061C4546D3002C4118 /* Main.storyboard */; };
 		0C61A90A1C4546D3002C4118 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C61A9091C4546D3002C4118 /* Assets.xcassets */; };
 		0C61A90D1C4546D3002C4118 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C61A90B1C4546D3002C4118 /* LaunchScreen.storyboard */; };
@@ -29,8 +28,6 @@
 		0C61A8FE1C4546D3002C4118 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0C61A9001C4546D3002C4118 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0C61A9011C4546D3002C4118 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0C61A9031C4546D3002C4118 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0C61A9041C4546D3002C4118 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0C61A9071C4546D3002C4118 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0C61A9091C4546D3002C4118 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C61A90C1C4546D3002C4118 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -90,8 +87,6 @@
 				0C7BE8021C5E08E700EFC219 /* TAUITableViewCellWithoutImage.m */,
 				0C3851C31C6C928B006BAC05 /* TAUITableViewCellWithImage.h */,
 				0C3851C41C6C928B006BAC05 /* TAUITableViewCellWithImage.m */,
-				0C61A9031C4546D3002C4118 /* ViewController.h */,
-				0C61A9041C4546D3002C4118 /* ViewController.m */,
 				0C61A9061C4546D3002C4118 /* Main.storyboard */,
 				0C61A9091C4546D3002C4118 /* Assets.xcassets */,
 				0C61A90B1C4546D3002C4118 /* LaunchScreen.storyboard */,
@@ -184,7 +179,6 @@
 				0C7BE8031C5E08E700EFC219 /* TAUITableViewCellWithoutImage.m in Sources */,
 				84E7EE461C7DD0D70024F245 /* MainViewController.m in Sources */,
 				0C3851C51C6C928B006BAC05 /* TAUITableViewCellWithImage.m in Sources */,
-				0C61A9051C4546D3002C4118 /* ViewController.m in Sources */,
 				0C61A9021C4546D3002C4118 /* AppDelegate.m in Sources */,
 				0C61A8FF1C4546D3002C4118 /* main.m in Sources */,
 			);
