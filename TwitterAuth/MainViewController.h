@@ -11,7 +11,7 @@
 #import  <Accounts/Accounts.h>
 #import  <Twitter/Twitter.h>
 
-@interface MainViewController : UIViewController < UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface MainViewController : UIViewController < UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UISearchBarDelegate, UISearchResultsUpdating>
 
 
 @property (nonatomic, copy) NSString *query;

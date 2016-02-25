@@ -21,6 +21,8 @@
 @property (nonatomic,strong) NSMutableData *buffer;
 @property (nonatomic,strong) NSMutableArray *results;
 @property (nonatomic,strong) NSRegularExpression *regex;
+@property (strong, nonatomic) UISearchController *searchControl;
+
 
 @end
 
@@ -41,7 +43,8 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //customizari pe NavigationBar
+    //NavigationController
+    
     UIColor * twitterColor=[UIColor colorWithRed:89/255.0f green:174/255.0f blue:235/255.0f alpha:1.0f];
     [self.navigationController.navigationBar setBarTintColor:twitterColor];
     [self.navigationController.navigationBar setTranslucent:NO];
@@ -53,9 +56,24 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     [self drawForms];
     [self.tableView setEstimatedRowHeight:300.0f];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
+    
+  // refreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
+    
+  // searchControl
+    self.searchControl = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchControl.searchResultsUpdater = self;
+    self.searchControl.dimsBackgroundDuringPresentation = NO;
+    self.searchControl.searchBar.delegate = self;
+    self.tableView.tableHeaderView = self.searchControl.searchBar;
+   
+    self.definesPresentationContext = YES;  // super proprietate!!! - specific faptul ca searchcontroller-ul va fi afisat in bounds-urile viewcontroller-ului parinte
+    
+    [self.searchControl.searchBar sizeToFit];
+
+    
     
     NSError *error;
     self.regex=[NSRegularExpression regularExpressionWithPattern:@"(#(\\w+)|@(\\w+))" options:NSRegularExpressionCaseInsensitive  error:&error];
@@ -262,16 +280,43 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:hereURLYouWantToOpen]];
     if([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TAUITableViewCellWithImage class]]){
         TAUITableViewCellWithImage *cell = [tableView cellForRowAtIndexPath:indexPath];
-        NSLog(@"continut cu imag %@", cell.userTALabel.text);
+//        NSLog(@"lungime  %lu", [cell.textTALabel.attributedText length]);
+//        NSRange range = [[cell.textTALabel.attributedText string] rangeOfString:@"https"];
+//        NSLog(@"range  %lu %lu", range.location, range.length);
+//
+//        NSString * url =[[cell.textTALabel.attributedText string] substringWithRange:NSMakeRange(range.location, [cell.textTALabel.attributedText length]-range.location-1)];
+//
+//        NSString *subString = [url substringWithRange: NSMakeRange(0, [url rangeOfString: @" "].location)];
+//
+//        
+//        NSLog(@" url e: %@", subString);
+        
+        
+        cell.textTALabel.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(tapOnLink:)];
+        [cell.textTALabel addGestureRecognizer:tapGesture];
        }
     else {
         TAUITableViewCellWithoutImage *cell = [tableView cellForRowAtIndexPath:indexPath];
-        NSLog(@"continut fara imag %@", cell.userTALabel.text);
+        NSLog(@"continut fara imag %@", cell.textTALabel.attributedText);
+        cell.textTALabel.userInteractionEnabled=YES;
         
     }
 
     
 }
+
+
+- (void)tapOnLink:(UITapGestureRecognizer *)tapGesture
+{
+    if (tapGesture.state == UIGestureRecognizerStateEnded)
+    {
+        NSLog(@"url is ");
+    }
+}
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -437,6 +482,8 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     for (NSTextCheckingResult *match in matchesOfURLS) {
         NSRange wordRange = [match range];
         [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:wordRange];
+        [attString addAttribute: NSLinkAttributeName value:match range:wordRange];
+
     }
     
     //identifica  # si @ in tweet.
@@ -460,7 +507,8 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     return attString;
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - UITextFieldDelegate delegate
+
 - (BOOL) textFieldShouldReturn:(UITextField *)textField{
     if (textField==self.searchTextField){
         [textField resignFirstResponder];
@@ -471,5 +519,21 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     return true;
     
 }
+
+
+#pragma mark - UISearchResultsUpdating delegate
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    NSString *searchString = searchController.searchBar.text;
+    self.searchText=searchString;
+    NSLog(@"s-a introdus %@", self.searchText);
+    [self interogareTwitter];
+
+    
+//    [self searchForText:searchString scope:searchControl.searchBar.selectedScopeButtonIndex];
+//    [self.tableView reloadData];
+}
+
 
 @end
