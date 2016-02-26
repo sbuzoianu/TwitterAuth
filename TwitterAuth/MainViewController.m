@@ -526,14 +526,23 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     NSString *searchString = searchController.searchBar.text;
-    self.searchText=searchString;
-    NSLog(@"s-a introdus %@", self.searchText);
-    [self interogareTwitter];
-
+    if ( ([searchString length] >0) &&[[searchString  substringFromIndex: [searchString length] - 1] isEqualToString:@"\n"]){
+        self.searchText=searchString;
+        NSLog(@"s-a introdus %@", self.searchText);
+       // [searchController.searchBar resignFirstResponder];
+        [self interogareTwitter];
+    }
+    else {
+        self.searchText=searchString;
+        if  ([searchString length] >0)
+        { NSLog(@"s-a introdus %@", [searchString  substringFromIndex: [searchString length] - 1]);
+        }
+    }
     
 //    [self searchForText:searchString scope:searchControl.searchBar.selectedScopeButtonIndex];
 //    [self.tableView reloadData];
 }
+
 
 
 @end
