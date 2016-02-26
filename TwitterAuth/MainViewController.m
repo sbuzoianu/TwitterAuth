@@ -209,7 +209,7 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
              NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/search/tweets.json"];
              
              if ([self.searchText length] == 0){
-                 self.searchText=@"barcelona";
+                 self.searchText=@"bari";
              }
              
              NSString *encodedQuery = [self.searchText stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
@@ -221,10 +221,11 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
                                                        requestMethod:SLRequestMethodGET
                                                                  URL:url
                                                           parameters:parameters];
+
              NSArray *accounts = [self.accountStore accountsWithAccountType:accountType];
              slRequest.account = [accounts lastObject];
              NSURLRequest *request = [slRequest preparedURLRequest];
-             
+
              [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
              NSURLSession *session = [NSURLSession sharedSession];
              NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
@@ -232,6 +233,7 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
                                                {
                                                    if (data)
                                                    {
+
                                                        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                                        NSError *jsonParsingError = nil;
                                                        NSDictionary *jsonResults = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParsingError];
@@ -526,21 +528,9 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     NSString *searchString = searchController.searchBar.text;
-    if ( ([searchString length] >0) &&[[searchString  substringFromIndex: [searchString length] - 1] isEqualToString:@"\n"]){
-        self.searchText=searchString;
-        NSLog(@"s-a introdus %@", self.searchText);
-       // [searchController.searchBar resignFirstResponder];
-        [self interogareTwitter];
-    }
-    else {
-        self.searchText=searchString;
-        if  ([searchString length] >0)
-        { NSLog(@"s-a introdus %@", [searchString  substringFromIndex: [searchString length] - 1]);
-        }
-    }
-    
-//    [self searchForText:searchString scope:searchControl.searchBar.selectedScopeButtonIndex];
-//    [self.tableView reloadData];
+    self.searchText=searchString;
+    [self interogareTwitter];
+    [self.tableView reloadData];
 }
 
 
