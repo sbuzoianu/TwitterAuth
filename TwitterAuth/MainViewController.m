@@ -49,30 +49,32 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     [self.navigationController.navigationBar setBarTintColor:twitterColor];
     [self.navigationController.navigationBar setTranslucent:NO];
     [self.navigationController.navigationBar setTitleTextAttributes: [NSDictionary
-                                                dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+                                                                      dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:
+           [UIColor blackColor]}
+     ];
+    
     [self.navigationItem setTitle:@"Twitter"];
     
+    //search button on navigationBar
+    UIBarButtonItem * rightButton = [[UIBarButtonItem alloc]
+                                     initWithImage:[UIImage imageNamed:@"search.png"]
+                                     style:UIBarButtonItemStyleDone
+                                     target:self
+                                     action:@selector(clickOnButton:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
     
     [self drawForms];
     [self.tableView setEstimatedRowHeight:300.0f];
     [self.tableView setRowHeight:UITableViewAutomaticDimension];
     
-  // refreshControl
+    // refreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-  // searchControl
-    self.searchControl = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchControl.searchResultsUpdater = self;
-    self.searchControl.dimsBackgroundDuringPresentation = NO;
-    self.searchControl.searchBar.delegate = self;
-    self.tableView.tableHeaderView = self.searchControl.searchBar;
-   
-    self.definesPresentationContext = YES;  // super proprietate!!! - specific faptul ca searchcontroller-ul va fi afisat in bounds-urile viewcontroller-ului parinte
     
-    [self.searchControl.searchBar sizeToFit];
-
     
     
     NSError *error;
@@ -81,6 +83,22 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     [self interogareTwitter];
     
 }
+
+- (void) clickOnButton:(id)sender{
+    // searchControl
+    self.searchControl = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchControl.searchResultsUpdater = self;
+    self.searchControl.dimsBackgroundDuringPresentation = NO;
+    self.searchControl.searchBar.delegate = self;
+    self.tableView.tableHeaderView = self.searchControl.searchBar;
+    
+    self.definesPresentationContext = YES;  // super proprietate!!! - specific faptul ca searchcontroller-ul va fi afisat in bounds-urile viewcontroller-ului parinte
+    
+    [self.searchControl.searchBar sizeToFit];
+    
+    NSLog(@" sunt in click de buton");
+}
+
 
 
 - (void) drawForms{
@@ -221,11 +239,11 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
                                                        requestMethod:SLRequestMethodGET
                                                                  URL:url
                                                           parameters:parameters];
-
+             
              NSArray *accounts = [self.accountStore accountsWithAccountType:accountType];
              slRequest.account = [accounts lastObject];
              NSURLRequest *request = [slRequest preparedURLRequest];
-
+             
              [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
              NSURLSession *session = [NSURLSession sharedSession];
              NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
@@ -233,7 +251,7 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
                                                {
                                                    if (data)
                                                    {
-
+                                                       
                                                        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                                                        NSError *jsonParsingError = nil;
                                                        NSDictionary *jsonResults = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParsingError];
@@ -247,7 +265,7 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
                                                            [self.tableView reloadData];
                                                            
                                                            if ([[NSThread currentThread] isMainThread]){
-                                                               NSLog(@"Sunt in main thread");
+                                                               //  NSLog(@"Sunt in main thread");
                                                            }
                                                            else{
                                                                NSLog(@"Nu sunt in main thread");
@@ -282,30 +300,30 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:hereURLYouWantToOpen]];
     if([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[TAUITableViewCellWithImage class]]){
         TAUITableViewCellWithImage *cell = [tableView cellForRowAtIndexPath:indexPath];
-//        NSLog(@"lungime  %lu", [cell.textTALabel.attributedText length]);
-//        NSRange range = [[cell.textTALabel.attributedText string] rangeOfString:@"https"];
-//        NSLog(@"range  %lu %lu", range.location, range.length);
-//
-//        NSString * url =[[cell.textTALabel.attributedText string] substringWithRange:NSMakeRange(range.location, [cell.textTALabel.attributedText length]-range.location-1)];
-//
-//        NSString *subString = [url substringWithRange: NSMakeRange(0, [url rangeOfString: @" "].location)];
-//
-//        
-//        NSLog(@" url e: %@", subString);
+        //        NSLog(@"lungime  %lu", [cell.textTALabel.attributedText length]);
+        //        NSRange range = [[cell.textTALabel.attributedText string] rangeOfString:@"https"];
+        //        NSLog(@"range  %lu %lu", range.location, range.length);
+        //
+        //        NSString * url =[[cell.textTALabel.attributedText string] substringWithRange:NSMakeRange(range.location, [cell.textTALabel.attributedText length]-range.location-1)];
+        //
+        //        NSString *subString = [url substringWithRange: NSMakeRange(0, [url rangeOfString: @" "].location)];
+        //
+        //
+        //        NSLog(@" url e: %@", subString);
         
         
         cell.textTALabel.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(tapOnLink:)];
         [cell.textTALabel addGestureRecognizer:tapGesture];
-       }
+    }
     else {
         TAUITableViewCellWithoutImage *cell = [tableView cellForRowAtIndexPath:indexPath];
         NSLog(@"continut fara imag %@", cell.textTALabel.attributedText);
         cell.textTALabel.userInteractionEnabled=YES;
         
     }
-
+    
     
 }
 
@@ -386,7 +404,7 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
                     dispatch_async(dispatch_get_main_queue(), ^{
                         cell.mediaView.image =image;
                         [cell setNeedsLayout];
-                    
+                        
                     });
                 }
             }
@@ -485,7 +503,7 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
         NSRange wordRange = [match range];
         [attString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:wordRange];
         [attString addAttribute: NSLinkAttributeName value:match range:wordRange];
-
+        
     }
     
     //identifica  # si @ in tweet.
@@ -522,17 +540,27 @@ static NSString *CellIdentifierWithImage = @"CellWithImage";
     
 }
 
-
 #pragma mark - UISearchResultsUpdating delegate
 
+// metoda folosita pentru cautare on-the-fly - merge folosita pentru cautare pe local
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    NSString *searchString = searchController.searchBar.text;
+    
+    
+}
+
+// o folosesc pentru a cauta dupa ce se termina de introdus textul -> press Enter
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self handleSearch:searchBar];
+}
+
+- (void)handleSearch:(UISearchBar *)searchBar {
+    NSLog(@"Acum cautam %@", searchBar.text);
+    [searchBar resignFirstResponder];
+    NSString *searchString = searchBar.text;
     self.searchText=searchString;
     [self interogareTwitter];
     [self.tableView reloadData];
 }
-
-
 
 @end
